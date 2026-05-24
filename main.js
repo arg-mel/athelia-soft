@@ -1,82 +1,36 @@
 /* ═══════════════════════════════════════
    ATHELIA SOFT — JavaScript Principal
 ═══════════════════════════════════════ */
- 
-// ── Navbar scroll effect ──
+
+// ── Navbar y Banner ──
 const navbar = document.getElementById('navbar');
+const topBanner = document.querySelector('.top-banner');
+let lastScroll = 0;
+
 window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 50);
+  const currentScroll = window.scrollY;
+  const isMobile = window.innerWidth <= 600;
+  const bannerHeight = isMobile ? 130 : 110;
+
+  // Efecto scrolled
+  navbar.classList.toggle('scrolled', currentScroll > 50);
+
+  // Banner aparece y desaparece
+  if (currentScroll > lastScroll && currentScroll > 100) {
+    topBanner.classList.add('hidden');
+    navbar.style.top = '0px';
+  } else {
+    topBanner.classList.remove('hidden');
+    navbar.style.top = bannerHeight + 'px';
+  }
+
+  lastScroll = currentScroll;
 });
- 
-// ── Hamburger menu ──
-const hamburger = document.getElementById('hamburger');
-const navLinks  = document.getElementById('navLinks');
- 
-hamburger.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-  hamburger.classList.toggle('active');
-});
- 
-navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    hamburger.classList.remove('active');
-  });
-});
- 
-// ── Smooth scroll for nav links ──
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    const target = document.querySelector(this.getAttribute('href'));
-    if (!target) return;
-    e.preventDefault();
-    const offset = 80;
-    const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-    window.scrollTo({ top, behavior: 'smooth' });
-  });
-});
- 
-// ── Intersection Observer: fade-in on scroll ──
-const observerOptions = { threshold: 0.12, rootMargin: '0px 0px -40px 0px' };
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), i * 80);
-      observer.unobserve(entry.target);
-    }
-  });
-}, observerOptions);
- 
-// Apply to cards and sections
-const animTargets = [
-  '.mv-card', '.policy-card', '.feature-card', '.team-card',
-  '.other-card', '.about-text', '.brand-card', '.product-hero-card',
-  '.problem-box', '.solution-box', '.contact-info', '.contact-form',
-  '.section-title', '.section-subtitle', '.section-tag'
-];
-animTargets.forEach(selector => {
-  document.querySelectorAll(selector).forEach(el => {
-    el.classList.add('fade-in-up');
-    observer.observe(el);
-  });
-});
- 
-// ── Animated bus markers (simulate real-time movement) ──
-const busMarkers = document.querySelectorAll('.bus-marker');
-function moveBuses() {
-  busMarkers.forEach(bus => {
-    const newTop  = 20 + Math.random() * 60;
-    const newLeft = 15 + Math.random() * 65;
-    bus.style.top  = newTop  + '%';
-    bus.style.left = newLeft + '%';
-  });
-}
-setInterval(moveBuses, 3000);
- 
+
 // ── Active nav link highlight on scroll ──
 const sections = document.querySelectorAll('section[id]');
 const navItems = document.querySelectorAll('.nav-links a[href^="#"]');
- 
+
 window.addEventListener('scroll', () => {
   let current = '';
   sections.forEach(section => {
@@ -93,12 +47,74 @@ window.addEventListener('scroll', () => {
     }
   });
 });
- 
+
+// ── Hamburger menu ──
+const hamburger = document.getElementById('hamburger');
+const navLinks  = document.getElementById('navLinks');
+
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+  hamburger.classList.toggle('active');
+});
+
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    hamburger.classList.remove('active');
+  });
+});
+
+// ── Smooth scroll ──
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    const offset = 80;
+    const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
+});
+
+// ── Intersection Observer: fade-in on scroll ──
+const observerOptions = { threshold: 0.12, rootMargin: '0px 0px -40px 0px' };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+const animTargets = [
+  '.mv-card', '.policy-card', '.feature-card', '.team-card',
+  '.other-card', '.about-text', '.brand-card', '.product-hero-card',
+  '.problem-box', '.solution-box', '.contact-info', '.contact-form',
+  '.section-title', '.section-subtitle', '.section-tag'
+];
+animTargets.forEach(selector => {
+  document.querySelectorAll(selector).forEach(el => {
+    el.classList.add('fade-in-up');
+    observer.observe(el);
+  });
+});
+
+// ── Animated bus markers ──
+const busMarkers = document.querySelectorAll('.bus-marker');
+function moveBuses() {
+  busMarkers.forEach(bus => {
+    const newTop  = 20 + Math.random() * 60;
+    const newLeft = 15 + Math.random() * 65;
+    bus.style.top  = newTop  + '%';
+    bus.style.left = newLeft + '%';
+  });
+}
+setInterval(moveBuses, 3000);
+
 // ── Contact form ──
 const contactForm = document.getElementById('contactForm');
 const formMsg     = document.getElementById('formMsg');
-
-
 
 contactForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -117,8 +133,8 @@ contactForm.addEventListener('submit', (e) => {
   btn.disabled = true;
 
   emailjs.sendForm(
-    'service_ed61idd',    /* ← reemplaza con tu Service ID */
-    'template_q1ph6ok',   /* ← reemplaza con tu Template ID */
+    'service_ed61idd',
+    'template_q1ph6ok',
     contactForm
   )
   .then(() => {
@@ -137,8 +153,7 @@ contactForm.addEventListener('submit', (e) => {
   });
 });
 
- 
-// ── Counter animation for hero stats ──
+// ── Counter animation ──
 function animateCounter(el, target, duration = 1500) {
   let start = 0;
   const step = target / (duration / 16);
@@ -152,12 +167,11 @@ function animateCounter(el, target, duration = 1500) {
     }
   }, 16);
 }
- 
-// Trigger counters when hero is visible
+
 const heroSection = document.querySelector('.hero');
 const counterEls  = document.querySelectorAll('.stat-number');
 let countersRun   = false;
- 
+
 const heroObserver = new IntersectionObserver((entries) => {
   if (entries[0].isIntersecting && !countersRun) {
     countersRun = true;
@@ -166,31 +180,16 @@ const heroObserver = new IntersectionObserver((entries) => {
     });
   }
 }, { threshold: 0.5 });
- 
+
 heroObserver.observe(heroSection);
- 
+
+// ── App tabs ──
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', function () {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
 console.log('%c Athelia Soft ', 'background:#4B2C7F;color:#EAB444;font-size:20px;font-weight:bold;padding:8px 16px;border-radius:8px;');
 console.log('%c Sabiduría que se convierte en software inteligente. ', 'color:#4B2C7F;font-size:12px;');
-
-
-// ── Banner desaparece al hacer scroll hacia arriba ──
-const topBanner = document.querySelector('.top-banner');
-let lastScroll = 0;
-
-window.addEventListener('scroll', () => {
-  const currentScroll = window.scrollY;
-  const isMobile = window.innerWidth <= 600;
-  const bannerHeight = window.innerWidth <= 600 ? '70px' : '130px'; 
-
-  if (currentScroll > lastScroll && currentScroll > 100) {
-    // scrolleando hacia ABAJO → oculta banner
-    topBanner.classList.add('hidden');
-    navbar.style.top = '0px';
-  } else {
-    // scrolleando hacia ARRIBA → muestra banner
-    topBanner.classList.remove('hidden');
-    navbar.style.top = bannerHeight;
-  }
-
-  lastScroll = currentScroll;
-});
