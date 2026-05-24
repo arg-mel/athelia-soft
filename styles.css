@@ -214,15 +214,24 @@ a { text-decoration: none; color: inherit; }
   }
 
   .navbar {
-    top: 130px;
+    top: 130px !important;
   }
 
   .navbar.scrolled {
-    top: 130px;
+    top: 130px !important;
+  }
+
+  .nav-inner {
+    padding: 15px 0;
+  }
+
+  .nav-logo img {
+    height: 55px;  
+    width: auto;        /* ← logo más pequeño en móvil */
   }
 
   .hero{
-    padding-top: 290px;
+    padding-top: 310px;
   }
 }
 
