@@ -169,16 +169,16 @@ a { text-decoration: none; color: inherit; }
 
 .banner-screenshot {
   height: 120px;
-  width: 60px;
+  width: auto;
   object-fit: contain;
   border-radius: 10px;
   border: 2px solid rgba(255,255,255,0.3);
-
+  flex-shrink: 0;
 }
 
 .banner-text {
   color: white;
-  font-size: 17px;
+  font-size: 22px;
   font-weight: 500;
 }
 
@@ -188,23 +188,41 @@ a { text-decoration: none; color: inherit; }
 
 @media (max-width: 600px) {
   .banner-text {
-    font-size: 11px;
+    font-size: 13px;
+  }
+
+  .banner-slide {
+    gap: 12px;
+    padding: 0 15px;
+    flex-direction: row;
+    align-items: center;
   }
 
   .banner-logo {
-    height: 35px;
+    height: 90px;
+    width: auto;
+  }
+
+  .banner-screenshot {
+    height: 100px;        /* ← imagen grande en móvil */
+    width: auto;
+    object-fit: contain;  /* ← sin recorte */
   }
 
   .top-banner {
-    height: 70px;         /* ← más pequeño en móvil */
+    height: 130px;         /* ← más pequeño en móvil */1
   }
 
   .navbar {
-    top: 70px;
+    top: 130px;
   }
 
   .navbar.scrolled {
-    top: 70px;
+    top: 130px;
+  }
+
+  .hero{
+    padding-top: 290px;
   }
 }
 
