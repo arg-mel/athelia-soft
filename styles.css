@@ -154,6 +154,7 @@ a { text-decoration: none; color: inherit; }
   text-decoration: none;
   cursor: pointer;
   transition: opacity 0.3s;
+  padding: 0 15px;
 }
 
 
@@ -183,6 +184,28 @@ a { text-decoration: none; color: inherit; }
 
 .banner-text strong {
   color: #EAB444;
+}
+
+@media (max-width: 600px) {
+  .banner-text {
+    font-size: 11px;
+  }
+
+  .banner-logo {
+    height: 35px;
+  }
+
+  .top-banner {
+    height: 70px;         /* ← más pequeño en móvil */
+  }
+
+  .navbar {
+    top: 70px;
+  }
+
+  .navbar.scrolled {
+    top: 70px;
+  }
 }
 
 @keyframes bannerSlide {

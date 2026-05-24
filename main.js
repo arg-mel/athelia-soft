@@ -179,6 +179,7 @@ let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
   const currentScroll = window.scrollY;
+  const bannerHeight = window.innerWidth <= 600 ? '70px' : '130px'; 
 
   if (currentScroll > lastScroll && currentScroll > 100) {
     // scrolleando hacia ABAJO → oculta banner
@@ -187,7 +188,7 @@ window.addEventListener('scroll', () => {
   } else {
     // scrolleando hacia ARRIBA → muestra banner
     topBanner.classList.remove('hidden');
-    navbar.style.top = '130px';
+    navbar.style.top = bannerHeight;
   }
 
   lastScroll = currentScroll;
