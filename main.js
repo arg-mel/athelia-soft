@@ -179,6 +179,7 @@ let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
   const currentScroll = window.scrollY;
+  const isMobile = window.innerWidth <= 600;
   const bannerHeight = window.innerWidth <= 600 ? '70px' : '130px'; 
 
   if (currentScroll > lastScroll && currentScroll > 100) {
