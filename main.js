@@ -3,28 +3,33 @@
 ═══════════════════════════════════════ */
 
 // ── Navbar y Banner ──
+// ── Navbar y Banner ──
 const navbar = document.getElementById('navbar');
 const topBanner = document.querySelector('.top-banner');
 let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
   const currentScroll = window.scrollY;
-  const isMobile = window.innerWidth <= 600;
-  const bannerHeight = isMobile ? 130 : 110;
 
   // Efecto scrolled
   navbar.classList.toggle('scrolled', currentScroll > 50);
 
-  // Banner aparece y desaparece
-  if (currentScroll > lastScroll && currentScroll > 100) {
-    topBanner.classList.add('hidden');
-    navbar.style.top = '0px';
+  if (currentScroll > 100 && currentScroll > lastScroll) {
+    // Bajando → navbar sube
+    navbar.style.setProperty('top', '0px', 'important');
+    topBanner.style.setProperty('top', '-200px', 'important');
   } else {
-    topBanner.classList.remove('hidden');
-    navbar.style.top = bannerHeight + 'px';
+    // Subiendo → navbar baja
+    navbar.style.setProperty('top', '130px', 'important');
+    topBanner.style.setProperty('top', '0px', 'important');
   }
 
   lastScroll = currentScroll;
+}, { passive: true });
+
+window.addEventListener('load', () => {
+  navbar.style.setProperty('top', '130px', 'important');
+  topBanner.style.setProperty('top', '0px', 'important');
 });
 
 // ── Active nav link highlight on scroll ──
@@ -195,17 +200,3 @@ console.log('%c Athelia Soft ', 'background:#4B2C7F;color:#EAB444;font-size:20px
 console.log('%c Sabiduría que se convierte en software inteligente. ', 'color:#4B2C7F;font-size:12px;');
 
 
-// ── Función para obtener altura del banner ──
-function getBannerHeight() {
-  return window.innerWidth <= 600 ? 130 : 110;
-}
-
-// ── Al cargar la página establece el top correcto ──
-window.addEventListener('load', () => {
-  navbar.style.top = getBannerHeight() + 'px';
-});
-
-// ── Al cambiar tamaño de pantalla actualiza ──
-window.addEventListener('resize', () => {
-  navbar.style.top = getBannerHeight() + 'px';
-});

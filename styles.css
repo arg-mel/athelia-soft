@@ -133,14 +133,12 @@ html, body {
   z-index: 1100;
   height: 130px;
   overflow: hidden;
-
-  -webkit-transform: translateZ(0); 
   background: linear-gradient(90deg, #112a74, #02a0c6);
-  transition: top 0.4s ease, height 0.4s ease, opacity 0.4s ease;
+  transition: top 0.4s ease;
 }
 
 .top-banner.hidden {
-  height: 0;               /* ← se encoge hasta desaparecer */
+  top: -200px;   /* ← sale por arriba en lugar de encogerse */
   opacity: 0;
   pointer-events: none;
 }
@@ -195,53 +193,14 @@ html, body {
 }
 
 @media (max-width: 600px) {
-  .banner-text {
-    font-size: 13px;
-  }
-
-  .banner-slide {
-    gap: 12px;
-    padding: 0 15px;
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .banner-logo {
-    height: 90px;
-    width: auto;
-  }
-
-  .banner-screenshot {
-    height: 100px;        /* ← imagen grande en móvil */
-    width: auto;
-    object-fit: contain;  /* ← sin recorte */
-  }
-
-  .top-banner {
-    height: 130px;         /* ← más pequeño en móvil */
-  }
-
-  .navbar {
-    top: 130px;
-    transition: top 0.4s ease;
-  }
-
-  .navbar.scrolled {
-    top: 130px !important;
-  }
-
-  .nav-inner {
-    padding: 15px 0;
-  }
-
-  .nav-logo img {
-    height: 55px;  
-    width: auto;        /* ← logo más pequeño en móvil */
-  }
-
-  .hero{
-    padding-top: 310px;
-  }
+  .banner-text { font-size: 13px; }
+  .banner-slide { gap: 12px; padding: 0 15px; }
+  .banner-logo { height: 90px; }
+  .banner-screenshot { height: 100px; object-fit: contain; }
+  .top-banner { height: 130px; }
+  .nav-inner { padding: 15px 0; }
+  .nav-logo img { height: 55px; width: auto; }
+  .hero { padding-top: 310px; }
 }
 
 @keyframes bannerSlide {
@@ -256,14 +215,17 @@ html, body {
 
 .navbar {
   position: fixed;
-  top: 130px; left: 0; right: 0;
+  top: 130px;
+  left: 0; right: 0;
   z-index: 1000;
   padding: 20px 0;
-  transition: top 0.4s ease, background 0.3s ease; 
+  transition: top 0.4s ease, background 0.3s ease;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
- 
+
 .navbar.scrolled {
-  top: 130px;
+  
   background: rgba(255,255,255,0.97);
   backdrop-filter: blur(12px);
   box-shadow: 0 2px 20px rgba(75,44,127,0.10);
@@ -1366,3 +1328,11 @@ html, body {
 }
 .fade-in-up.visible { opacity: 1; transform: translateY(0); }
 
+
+#navbar {
+  transition: top 0.4s ease !important;
+}
+
+.top-banner {
+  transition: top 0.4s ease !important;
+}
