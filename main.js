@@ -193,3 +193,19 @@ document.querySelectorAll('.tab').forEach(tab => {
 
 console.log('%c Athelia Soft ', 'background:#4B2C7F;color:#EAB444;font-size:20px;font-weight:bold;padding:8px 16px;border-radius:8px;');
 console.log('%c Sabiduría que se convierte en software inteligente. ', 'color:#4B2C7F;font-size:12px;');
+
+
+// ── Función para obtener altura del banner ──
+function getBannerHeight() {
+  return window.innerWidth <= 600 ? 130 : 110;
+}
+
+// ── Al cargar la página establece el top correcto ──
+window.addEventListener('load', () => {
+  navbar.style.top = getBannerHeight() + 'px';
+});
+
+// ── Al cambiar tamaño de pantalla actualiza ──
+window.addEventListener('resize', () => {
+  navbar.style.top = getBannerHeight() + 'px';
+});

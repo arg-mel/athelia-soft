@@ -129,12 +129,13 @@ a { text-decoration: none; color: inherit; }
   height: 130px;
   overflow: hidden;
   background: linear-gradient(90deg, #112a74, #02a0c6);
-  transition: all 0.4s ease;
+  transition: top 0.4s ease, height 0.4s ease, opacity 0.4s ease;
 }
 
 .top-banner.hidden {
   height: 0;               /* ← se encoge hasta desaparecer */
   opacity: 0;
+  pointer-events: none;
 }
 
 .banner-track {
@@ -210,11 +211,12 @@ a { text-decoration: none; color: inherit; }
   }
 
   .top-banner {
-    height: 130px;         /* ← más pequeño en móvil */1
+    height: 130px;         /* ← más pequeño en móvil */
   }
 
   .navbar {
-    top: 130px !important;
+    top: 130px;
+    transition: top 0.4s ease;
   }
 
   .navbar.scrolled {
@@ -248,7 +250,7 @@ a { text-decoration: none; color: inherit; }
   top: 130px; left: 0; right: 0;
   z-index: 1000;
   padding: 20px 0;
-  transition: all var(--transition);
+  transition: top 0.4s ease, background 0.3s ease; 
 }
  
 .navbar.scrolled {
