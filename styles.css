@@ -120,6 +120,11 @@ a { text-decoration: none; color: inherit; }
 .btn-full { width: 100%; justify-content: center; }
  
 /* ═══════════════ NAVBAR ═══════════════ */
+html, body {
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;  /* ← scroll suave en iOS/Android */
+}
+
 .top-banner {
   position: fixed;
   top: 0;
@@ -128,6 +133,8 @@ a { text-decoration: none; color: inherit; }
   z-index: 1100;
   height: 130px;
   overflow: hidden;
+
+  -webkit-transform: translateZ(0); 
   background: linear-gradient(90deg, #112a74, #02a0c6);
   transition: top 0.4s ease, height 0.4s ease, opacity 0.4s ease;
 }
@@ -243,6 +250,8 @@ a { text-decoration: none; color: inherit; }
   66%,  94% { transform: translateX(-66.66%); }
   100%      { transform: translateX(0%); }
 }
+
+
 
 
 .navbar {
